@@ -1,6 +1,6 @@
-﻿# Ödev Pusulası · Kurulum ve kullanım
+﻿# English Time Ödev Takip Sistemi · Kurulum ve kullanım
 
-Ödev Pusulası GitHub Pages üzerinde yayımlanır. Öğretmen ve öğrenci verileri Supabase projesinde kalır; GitHub deposunda uygulama dosyaları bulunur.
+English Time Ödev Takip Sistemi GitHub Pages üzerinde yayımlanır. Öğretmen ve öğrenci verileri Supabase projesinde kalır; GitHub deposunda uygulama dosyaları bulunur.
 
 **Canlı site:** https://alperenoymak7-cmd.github.io/odev-pusulasi/
 
@@ -35,3 +35,4 @@ Mevcut Supabase projesinde SQL değişikliği gerektiğinde ilgili migration dos
 - Depo ve site herkese açıktır. Öğrenci adları, parolaları, ödev yanıtları veya başka özel veriler GitHub’a eklenmemelidir.
 - Öğrenci parolaları uygulama veritabanında açık şekilde tutulmaz.
 - Öğrenci bağlantıları kişiye özeldir; yalnızca ilgili öğrenciyle paylaşılmalıdır.
+

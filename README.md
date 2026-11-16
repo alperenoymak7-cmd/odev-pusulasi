@@ -1,4 +1,4 @@
-﻿# Ödev Pusulası
+﻿# English Time Ödev Takip Sistemi
 
 Öğretmenlerin sınıf, öğrenci ve haftalık ödev takibi için statik web uygulaması.
 
@@ -17,3 +17,4 @@ Bu depo ve GitHub Pages sitesi herkese açıktır. Öğrenci bilgilerini, parola
 ## Supabase adresleri
 
 Supabase **Authentication → URL Configuration** bölümünde Site URL ve Redirect URLs olarak GitHub Pages adresi kayıtlıdır. Netlify adresi eski bağlantıların çalışabilmesi için yönlendirme listesinde bırakılmıştır.
+

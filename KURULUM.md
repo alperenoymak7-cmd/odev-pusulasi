@@ -1,60 +1,37 @@
-# Ödev Pusulası · Öğretmen kullanım taslağı
+﻿# Ödev Pusulası · Kurulum ve kullanım
 
-Bu paket, koordinatörün öğretmenlerle paylaşabileceği ortak web uygulamasının yayınlanmaya hazır başlangıç sürümüdür. Her öğretmen kendi hesabını açar, sınıfını ve öğrencilerini ekler, haftalık ödev yayımlar ve öğrenci bağlantılarını paylaşır. Öğrenci bağlantısı öğretmen panelini açmaz; sadece ilgili öğrencinin sınıfını, açık ödevlerini ve yanıt alanını gösterir.
+Ödev Pusulası GitHub Pages üzerinde yayımlanır. Öğretmen ve öğrenci verileri Supabase projesinde kalır; GitHub deposunda uygulama dosyaları bulunur.
 
-## Dosyalar
+**Canlı site:** https://alperenoymak7-cmd.github.io/odev-pusulasi/
 
-- `index.html`: Öğretmen ve öğrenci arayüzü.
-- `supabase-schema.sql`: Veritabanı tabloları, erişim kuralları ve öğrenci bağlantısı işlevleri.
-- `config.js`: Supabase bağlantı bilgileri girilecek dosya.
-- `config.example.js`: Örnek yapılandırma.
+## Yayın bilgisi
 
-## İlk yayın kurulumu
+- GitHub deposu: https://github.com/alperenoymak7-cmd/odev-pusulasi
+- Yayın kaynağı: `main` dalı, kök klasör (`/(root)`).
+- Dosyaları `main` dalına kaydettiğinde GitHub Pages otomatik olarak yeni sürümü yayımlar.
+- GitHub Pages ücretsiz planda herkese açık depolarda ücretsizdir.
 
-1. Supabase'te yeni bir proje oluştur.
-2. Projedeki **SQL Editor** bölümünü aç ve `supabase-schema.sql` içeriğini çalıştır.
-3. Supabase **Project Settings → API** bölümünden Project URL ve publishable (anon) key değerlerini al. Bu değerleri `config.js` dosyasındaki örnek değerlerle değiştir. `service_role` veya secret key'i web dosyalarına koyma.
-4. `index.html` ve `config.js` dosyalarını HTTPS ile yayın yapan statik site barındırıcısına yükle. Örnek: Netlify Drop veya Cloudflare Pages.
-5. Yayındaki sitenin URL'sini Supabase **Authentication → URL Configuration** altında Site URL ve Redirect URLs olarak ekle.
-6. Authentication → Email ayarlarından e-posta doğrulamasını açık tut. Öğretmenlerin doğrulama e-postası alabilmesi için özel SMTP sağlayıcısı bağla. Supabase'in varsayılan gönderimi genel öğretmen daveti/kayıtları için üretim gönderimi olarak uygun değildir.
-7. Yayın URL'sini öğretmenlerle paylaş. Her öğretmen **Hesap oluştur** ile kayıt olur, e-postasını doğrular ve giriş yaptıktan sonra kendi sınıf/şubesini kurar.
+## Supabase bağlantısı
+
+`config.js` dosyası Supabase Project URL ve publishable/anon key içerir. Tarayıcıda kullanılmak üzere tasarlanmış publishable key depoda bulunabilir. `service_role` veya `sb_secret_` anahtarını asla web dosyalarına koyma.
+
+Mevcut tablolar, öğretmen hesapları ve öğrenci yanıtları Supabase’te tutulur. Bu site taşıma işlemi Supabase verilerini değiştirmez. Authentication → URL Configuration bölümünde GitHub Pages adresi Site URL ve Redirect URLs olarak ayarlanmıştır; eski Netlify yönlendirmesi de geçiş sürecinde tutulur.
 
 ## Öğretmenin kullanım akışı
 
-1. Sınıf düzeyi ve şubeyi kaydeder.
-2. **Sınıf ve öğrenciler** bölümünde öğrenci adlarını satır satır yapıştırıp ekler.
-3. **Sınıfım** bölümünden haftalık ödev adı, açıklaması, hafta başlangıcı ve isteğe bağlı son tarihi girip yayımlar.
-4. **Öğrenci bağlantıları** bölümünden her öğrenci için özel bağlantı oluşturur, kopyalar ve yalnızca o öğrenciyle paylaşır.
-5. Yanıtlar geldikçe **Sınıfım** ekranında tamamladı, yapmadı, kısmen yaptı, anlamadığı yer ve henüz yanıt vermedi durumlarını ve öğrenci notlarını görür.
-6. Süresi biten ödevi **Ödevi kapat** ile öğrenci ekranından kaldırır. Eski yanıtlar öğretmen ekranında kayıtlı kalır.
+1. Öğretmen **Hesap oluştur** ile kayıt olur, e-postasını doğrular ve giriş yapar.
+2. Sınıf düzeyi ve şubesini kaydeder; **Sınıf ve öğrenciler** bölümünden öğrenci adlarını ekler.
+3. **Sınıfım** bölümünde haftalık ödev adı, açıklaması, hafta başlangıcı ve isteğe bağlı son tarihi girip yayımlar.
+4. **Öğrenci bağlantıları** bölümünden öğrencilere özel bağlantı oluşturup yalnızca ilgili öğrenciyle paylaşır.
+5. Öğrenci ödev durumunu seçer; iki yeni kelime ve konu yorumunu yazar. Öğretmen yanıtları sınıf ekranında görür ve gerekirse durumu kendisi işaretler.
+6. Birden fazla sınıfı sınıf seçicisinden yönetebilir. Süresi biten ödevi kapatabilir; eski yanıtlar geçmişte saklanır.
 
-## Erişim ve bağlantı notları
+## Veritabanı güncellemeleri
 
-- Her öğretmenin verileri Supabase Auth oturumu ve satır düzeyi erişim politikalarıyla kendi hesabına ayrılır.
-- Öğrenci bağlantısı uzun, rastgele bir erişim anahtarı taşır. Veritabanında anahtarın kendisi değil özeti saklanır.
-- Öğrenci bağlantısı yalnızca o öğrenciye ait bilgileri ve açık ödevleri döndürür. Yanıt gönderimi veritabanı işlevi üzerinden sınıf/ödev/öğrenci eşleşmesi kontrol edilerek yapılır.
-- Öğretmen bir bağlantıyı yenilerse önceki bağlantı geçersiz olur.
-- Bu paket yayına hazır kaynak taslağıdır; Supabase projesi açılmadan ve site yayınlanmadan çalışan ortak internet sitesi oluşmaz. Bu ortamda senin adına harici hesap açmadım veya site yayımlamadım.
+Mevcut Supabase projesinde SQL değişikliği gerektiğinde ilgili migration dosyasını Supabase SQL Editor’de çalıştır. Tüm şemayı mevcut veritabanında yeniden çalıştırma. Site kodu güncellemeleri ise yalnızca GitHub deposunun `main` dalına kaydedilir.
 
-## Güvenlik ayarının özeti
+## Güvenlik
 
-Supabase tablolarında Row Level Security etkinleştirilir. Öğretmenler yalnızca kendi sınıf, öğrenci, ödev ve yanıt satırlarına erişir. Anonim öğrencilerin tablo erişimi yoktur; öğrenci verisini yalnızca erişim anahtarı doğrulayan iki dar kapsamlı veritabanı işlevi sunar. İşlevler sabit ve boş `search_path` ile tanımlıdır.
-
-
-
-## Mevcut Supabase projesinde öğrenci girişi
-
-Öğretmenler ve sınıflar zaten kuruluysa tüm şemayı yeniden çalıştırma. Supabase SQL Editor’de "student-login-migration.sql" dosyasının tamamını bir kez çalıştır. Bu ekleme öğrenci kullanıcı adını, şifre özeti saklamayı ve öğrenci oturumlarını kurar. Ardından siteyi yenile; öğretmen "Sınıf ve öğrenciler" bölümünden öğrenci için kullanıcı adı ve şifre belirleyebilir. Şifre kaydedildiğinde yalnızca o anda gösterilir; unutulursa öğretmen yenisini belirler.
-
-Öğrenci ve öğretmen girişleri açılışta ayrı sekmelerde görünür. Öğrenci yalnızca kendi açık ödevlerini ve yanıt alanını görür. Öğrenci bağlantıları da çalışmaya devam eder.
-
-## Mevcut yayına ödev kelimeleri ve yorum alanı ekleme
-
-Supabase projenizde **SQL Editor → New query** bölümünü açın. `homework-reflection-migration.sql` dosyasının tamamını çalıştırın. Bu işlem mevcut yanıtları silmez; yanıt kaydına iki kelime ve konu yorumu alanı ekler. Ardından yeni site dosyalarını Netlify’a yükleyin. Öğrenci durum seçtikten sonra iki kelime ve konu yorumunu doldurup **Yanıtı kaydet** düğmesine basar; öğretmen bunları ödev yanıtının altında görür.
-## Öğretmenin durum girişi
-
-Mevcut Supabase projesinde **SQL Editor → New query** bölümünde `teacher-status-migration.sql` dosyasını çalıştır. Öğretmen ödev takibinde öğrenci satırından durumu kendisi kaydedebilir.
-
-## Birden fazla sınıf
-
-Öğretmen panelinin üst kısmındaki sınıf seçicisinden sınıflar arasında geçiş yapabilir; **+ Sınıf ekle** düğmesiyle aynı hesaba yeni sınıf/şube oluşturabilir. Var olan sınıflar ve ödev kayıtları korunur.
+- Depo ve site herkese açıktır. Öğrenci adları, parolaları, ödev yanıtları veya başka özel veriler GitHub’a eklenmemelidir.
+- Öğrenci parolaları uygulama veritabanında açık şekilde tutulmaz.
+- Öğrenci bağlantıları kişiye özeldir; yalnızca ilgili öğrenciyle paylaşılmalıdır.

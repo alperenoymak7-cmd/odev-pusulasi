@@ -2,16 +2,18 @@
 
 Öğretmenlerin sınıf, öğrenci ve haftalık ödev takibi için statik web uygulaması.
 
-## GitHub Pages yayını
+**Yayın adresi:** https://alperenoymak7-cmd.github.io/odev-pusulasi/
 
-1. Bu dosyaları bir GitHub deposunun kök dizinine yükle.
-2. Depoda **Settings → Pages** bölümünü aç.
-3. **Build and deployment → Deploy from a branch** seç; `main` ve `/(root)` ayarlarını kaydet.
-4. GitHub Pages adresi yayınlanınca Supabase **Authentication → URL Configuration** bölümünde Site URL’yi bu adrese ayarla ve aynı adresi Redirect URLs listesine ekle. Eski Netlify adresini geçişi tamamlayana kadar listede tutabilirsin.
-5. Yeniden yayınlama gerekmez; Pages’in yayınlanmasını bekleyip yeni adreste giriş ekranını kontrol et.
+## Yayın ve güncelleme
+
+Site GitHub Pages üzerinde, `main` dalının kök klasöründen yayımlanır. Yeni sürüm için dosyaları depodaki `main` dalına kaydetmen yeterli; GitHub Pages otomatik günceller.
 
 ## Supabase bağlantısı
 
-`config.js` uygulamanın Supabase Project URL ve publishable key değerlerini içerir. Publishable/anon anahtarı tarayıcıda kullanılan anahtardır; `service_role` veya `sb_secret_` anahtarını buraya koyma. Veritabanı ve mevcut kullanıcı kayıtları Supabase’te kalır; GitHub’a taşınmaz.
+`config.js` uygulamanın Supabase Project URL ve publishable key değerlerini içerir. Publishable/anon anahtarı tarayıcıda kullanılan anahtardır; `service_role` veya `sb_secret_` anahtarını buraya koyma. Veritabanı, öğretmen hesapları, sınıflar ve öğrenci yanıtları Supabase’te kalır; GitHub’a taşınmaz.
 
-GitHub Pages’te site ve kod herkes tarafından görülebilir. Öğrenci bilgilerini, parolaları veya özel verileri bu depoya ekleme.
+Bu depo ve GitHub Pages sitesi herkese açıktır. Öğrenci bilgilerini, parolaları veya özel verileri depoya ekleme.
+
+## Supabase adresleri
+
+Supabase **Authentication → URL Configuration** bölümünde Site URL ve Redirect URLs olarak GitHub Pages adresi kayıtlıdır. Netlify adresi eski bağlantıların çalışabilmesi için yönlendirme listesinde bırakılmıştır.
